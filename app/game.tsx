@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect, useCallback } from "react";
 import { LatLng } from "leaflet";
-import MapPick from "./map";
+import MapPick from "./component/map";
 import { GameState, Location, Player } from "./model/model";
 import Button from "./component/button";
 

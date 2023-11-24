@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import Button from "./component/button";
 
 interface PlayerSetupProps {
   players: number;
@@ -18,7 +19,7 @@ const PlayerSetup: React.FC<PlayerSetupProps> = ({
 }) => {
   return (
     <div className="flex flex-col items-center justify-center h-screen font-nunito">
-      <h1 className="text-3xl font-bold mb-6">NYC Game Setup</h1>
+      <h1 className="text-3xl font-bold mb-2">NYC Game Setup</h1>
 
       <div className="text-xl">
         <div className="mb-4 mt-4">
@@ -43,12 +44,11 @@ const PlayerSetup: React.FC<PlayerSetupProps> = ({
         </div>
       </div>
 
-      <button
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      <Button
+        text="Start game"
+        colorClass="bg-yellow-300"
         onClick={() => setGameSet(true)}
-      >
-        Start game
-      </button>
+      ></Button>
     </div>
   );
 };

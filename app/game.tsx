@@ -183,21 +183,21 @@ const Game: React.FC<GameProps> = (props: GameProps) => {
         )}
       </div>
 
-      <main className="flex flex-col lg:flex-row items-start w-full max-w-8xl my-4">
-        <div className="lg:h-[80vh] h-[50vh] lg:w-3/4 w-full border-2 border-black rounded-sm overflow-hidden">
+      <main className="flex flex-col lg:flex-row items-start w-full max-w-8xl my-4 ">
+        <div className="lg:h-[80vh] h-[60vh] lg:w-3/4 w-full border-2 border-black rounded-sm overflow-hidden">
           <MapPick
             position={position}
             setPosition={setPosition}
             target={targetLocation?.coordinates || null}
           />
         </div>
-        <div className="lg:w-1/4 w-full lg:h-[80vh] overflow-auto p-4 rounded-sm mx-2 mt-4 lg:mt-0">
+
+        <div className="lg:w-1/4 w-full lg:h-[80vh] rounded-sm lg:mx-4 mt-4 lg:mt-0 overflow-hidden">
           <div className="h-20 text-center">
             <h1 className="text-3xl mb-4">Where is {targetLocation?.name}?</h1>
           </div>
 
           {renderGameState()}
-
           <div className="flex flex-row mt-4 space-x-4">
             <div className="flex justify-center">
               <Button onClick={nextTurn} colorClass="bg-yellow-300">

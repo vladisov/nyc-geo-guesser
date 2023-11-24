@@ -48,7 +48,6 @@ const Game: React.FC<GameProps> = (props: GameProps) => {
     }
 
     const locations_shuffled = shuffle(locations_data);
-    console.log(locations_shuffled);
     setLocations(locations_shuffled);
     setTurn(0);
     setGameState(newGameState);
@@ -59,12 +58,10 @@ const Game: React.FC<GameProps> = (props: GameProps) => {
     if (isGameSet) {
       setInitialGameState();
     }
-    console.log("game started");
   }, [isGameSet, setInitialGameState]);
 
   useEffect(() => {
     if (position && targetLocation && attemptsCounter < numAttempts) {
-      console.log("pos updated");
       const distance = position.distanceTo(targetLocation.coordinates); // Distance in meters
       const currentPlayerId = turn;
       const currentPlayer = gameState.players.get(currentPlayerId);

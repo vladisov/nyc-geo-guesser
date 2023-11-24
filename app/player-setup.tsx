@@ -44,11 +44,9 @@ const PlayerSetup: React.FC<PlayerSetupProps> = ({
         </div>
       </div>
 
-      <Button
-        text="Start game"
-        colorClass="bg-yellow-300"
-        onClick={() => setGameSet(true)}
-      ></Button>
+      <Button colorClass="bg-yellow-300" onClick={() => setGameSet(true)}>
+        Start game
+      </Button>
     </div>
   );
 };

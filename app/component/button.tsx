@@ -1,12 +1,12 @@
 import React from "react";
 
 interface ButtonProps {
-  text: string;
+  children: any;
   colorClass: string;
   onClick: () => any;
 }
 
-const Button: React.FC<ButtonProps> = ({ text, onClick, colorClass }) => {
+const Button: React.FC<ButtonProps> = ({ onClick, colorClass, children }) => {
   return (
     <div className="group relative inline-block focus:outline-none focus:ring">
       <span
@@ -16,7 +16,7 @@ const Button: React.FC<ButtonProps> = ({ text, onClick, colorClass }) => {
         onClick={onClick}
         className="relative inline-block border-2 border-current px-8 py-3 text-sm font-bold uppercase tracking-widest text-black group-active:text-opacity-75"
       >
-        {text}
+        {children}
       </button>
     </div>
   );

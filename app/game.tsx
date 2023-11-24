@@ -166,16 +166,16 @@ const Game: React.FC<GameProps> = (props: GameProps) => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen px-4 font-nunito">
-      <div>
-        {attemptsCounter == numAttempts ? (
+    <div className="flex flex-col items-center justify-center min-h-screen px-4 font-nunito">
+      <div className="text-center">
+        {attemptsCounter === numAttempts ? (
           <h1 className="text-3xl font-bold mb-6">{getWinner()} WON</h1>
         ) : (
           <div className="group relative inline-block focus:outline-none focus:ring">
             <span className="absolute inset-0 border-b-black border-b-2 transition-transform"></span>
             <div
               onClick={restartGame}
-              className="relative inline-block px-8 py-3 font-bold text-3xl uppercase tracking-widest text-black group-active:text-opacity-75"
+              className="relative inline-block px-8 py-3 font-bold text-3xl uppercase tracking-widest text-black group-active:text-opacity-75 cursor-pointer"
             >
               {gameState.players.get(turn)?.name} Turn
             </div>
@@ -183,15 +183,15 @@ const Game: React.FC<GameProps> = (props: GameProps) => {
         )}
       </div>
 
-      <main className="flex flex-row items-start w-full max-w-8xl my-4 ">
-        <div className="h-[80vh] w-3/4  border-2 border-black rounded-sm overflow-hidden">
+      <main className="flex flex-col lg:flex-row items-start w-full max-w-8xl my-4">
+        <div className="lg:h-[80vh] h-[50vh] lg:w-3/4 w-full border-2 border-black rounded-sm overflow-hidden">
           <MapPick
             position={position}
             setPosition={setPosition}
             target={targetLocation?.coordinates || null}
           />
         </div>
-        <div className="w-1/4 h-[80vh] overflow-auto p-4 rounded-sm mx-2 ">
+        <div className="lg:w-1/4 w-full lg:h-[80vh] overflow-auto p-4 rounded-sm mx-2 mt-4 lg:mt-0">
           <div className="h-20 text-center">
             <h1 className="text-3xl mb-4">Where is {targetLocation?.name}?</h1>
           </div>
@@ -200,18 +200,14 @@ const Game: React.FC<GameProps> = (props: GameProps) => {
 
           <div className="flex flex-row mt-4 space-x-4">
             <div className="flex justify-center">
-              <Button
-                text="Next"
-                onClick={nextTurn}
-                colorClass="bg-yellow-300"
-              />
+              <Button onClick={nextTurn} colorClass="bg-yellow-300">
+                Next
+              </Button>
             </div>
             <div className="flex justify-center">
-              <Button
-                text="Restart"
-                onClick={restartGame}
-                colorClass="bg-red-300"
-              />
+              <Button onClick={restartGame} colorClass="bg-red-300">
+                Restart
+              </Button>
             </div>
           </div>
         </div>

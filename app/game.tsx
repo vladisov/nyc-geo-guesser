@@ -4,6 +4,7 @@ import { LatLng } from "leaflet";
 import MapPick from "./component/map";
 import { GameState, Location, Player } from "./model/model";
 import Button from "./component/button";
+import locations_data from "./component/locations_data";
 
 interface GameProps {
   isGameSet: boolean;
@@ -29,6 +30,15 @@ const Game: React.FC<GameProps> = (props: GameProps) => {
     new GameState(new Map())
   );
 
+  const shuffle = (input: any[]) => {
+    let array = input.slice();
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  };
+
   const setInitialGameState = useCallback(() => {
     const newGameState = new GameState(new Map());
 
@@ -37,20 +47,13 @@ const Game: React.FC<GameProps> = (props: GameProps) => {
       newGameState.addPlayer(newPlayer);
     }
 
+    const locations_shuffled = shuffle(locations_data);
+    console.log(locations_shuffled);
+    setLocations(locations_shuffled);
     setTurn(0);
     setGameState(newGameState);
+    setTargetLocation(locations_shuffled.pop() || null);
   }, [numPlayers]);
-
-  useEffect(() => {
-    const fetchLocations = async () => {
-      const response = await fetch("/locations.json");
-      const data: Location[] = await response.json();
-      setLocations(data);
-      setTargetLocation(data[Math.floor(Math.random() * data.length)]);
-    };
-
-    fetchLocations();
-  }, []);
 
   useEffect(() => {
     if (isGameSet) {
@@ -74,16 +77,14 @@ const Game: React.FC<GameProps> = (props: GameProps) => {
           score: 0,
         };
 
-        // Create an updated player with the new attempt
         const updatedPlayer = new Player(
           currentPlayer.id,
           currentPlayer.name,
           currentPlayer.totalScore,
           [...currentPlayer.attempts, attempt]
         );
-        updatedPlayer.calculateScore(); // Assuming you have a method to calculate and update the score
+        updatedPlayer.calculateScore();
 
-        // Update the gameState with the new player data
         setGameState((prevGameState) => {
           const newPlayers = new Map(prevGameState.players);
           newPlayers.set(updatedPlayer.id, updatedPlayer);
@@ -96,7 +97,7 @@ const Game: React.FC<GameProps> = (props: GameProps) => {
 
   const clearMap = () => {
     setPosition(null);
-    setTargetLocation(locations[Math.floor(Math.random() * locations.length)]);
+    setTargetLocation(locations.pop() || null);
   };
 
   const nextTurn = () => {
@@ -139,9 +140,7 @@ const Game: React.FC<GameProps> = (props: GameProps) => {
             <div className="text-sm font-medium text-gray-800 mt-2">
               Score:{" "}
               <span className="font-semibold ">
-                {player.attempts
-                  .reduce((acc, curr) => acc + curr.score, 0)
-                  .toFixed(1)}
+                {" " + player.totalScore.toFixed(0)}
               </span>
             </div>
           </div>

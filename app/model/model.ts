@@ -1,5 +1,4 @@
 import { LatLng } from "leaflet";
-import { Exo } from "next/font/google";
 
 class Location {
   name: string;
@@ -45,7 +44,7 @@ class Player {
     this.id = id;
     this.name = name;
     this.attempts = attempts;
-    this.totalScore = 0;
+    this.totalScore = totalScore;
   }
 
   addAttempt(attempt: Attempt) {
@@ -55,7 +54,6 @@ class Player {
 
   public calculateScore() {
     // Simple scoring logic: the closer the distance, the higher the score.
-    // This is just an example and can be replaced with more complex logic.
     const lastAttempt = this.attempts[this.attempts.length - 1];
     lastAttempt.score = Math.max(0, 1000 - lastAttempt.distance / 10);
     this.totalScore += lastAttempt.score;
@@ -76,8 +74,6 @@ class GameState {
   getPlayer(id: number): Player | undefined {
     return this.players.get(id);
   }
-
-  // Additional methods to manage game state can be added here.
 }
 
 export { Location, Attempt, Player, GameState };
